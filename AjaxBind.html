@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <!-- JQWidgets -->
+    <link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css">
+    <script src="https://jqwidgets.com/public/jqwidgets/jqx-all.js"></script>
+</head>
+
+<body>
+    <div id="jqxWidget"></div>
+
+    <script>
+        var responseData;
+
+        // $.ajax({
+        //     url: './JSON-1.json',
+        //     type: 'GET',
+        //     success: function (data) {
+        //         responseData = data;
+        //     }
+        // });
+
+        var source = {
+            dataType: 'json',
+            dataFields: [
+                { name: 'name', type: 'string' },
+                { name: 'age', type: 'int' },
+                { name: 'hobby', type: 'string' }
+            ],
+            id: 'sourceID',
+            root: 'users',
+            url: './JSON-1.json',
+            type: 'GET'
+        };
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
+
+        $('#jqxWidget').jqxDataTable({
+            theme: 'arctic',
+            width: 350,
+            source: dataAdapter,
+            columns: [{
+                text: 'Name',
+                dataField: 'name',
+                width: 100
+            }, {
+                text: 'Age',
+                dataField: 'age',
+                width: 100
+            }, {
+                text: 'Hobby',
+                dataField: 'hobby',
+                width: 150
+            }]
+        });
+    </script>
+</body>
+
+</html>
