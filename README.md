@@ -17,5 +17,10 @@
 * It is a web ui framework based on jquery.
 * Works on PC or mobile.
 
+### Process
+1. The data is loaded.
+2. Select the space to work with.
+3. Bind space and data.
+
 ## Histories
     2018.08.01. ~ JQWidgets.
