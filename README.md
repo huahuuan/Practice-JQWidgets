@@ -23,4 +23,4 @@
 3. Bind space and data.
 
 ## Histories
-    2018.08.01. ~ JQWidgets.
+    2018.07.01. ~ JQWidgets.
