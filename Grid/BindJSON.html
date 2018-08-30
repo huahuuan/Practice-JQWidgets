@@ -16,13 +16,13 @@
     <script>
         var responseData;
 
-        // $.ajax({
-        //     url: './JSON-1.json',
-        //     type: 'GET',
-        //     success: function (data) {
-        //         responseData = data;
-        //     }
-        // });
+        $.ajax({
+            url: './JSON.json',
+            type: 'GET',
+            success: function (data) {
+                responseData = data;
+            }
+        });
 
         var source = {
             dataType: 'json',
