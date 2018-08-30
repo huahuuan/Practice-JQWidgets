@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- JQWidgets -->
+    <link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css">
+    <script src="https://jqwidgets.com/public/jqwidgets/jqx-all.js"></script>
+</head>
+
+<body>
+
+    <div id="grid"></div>
+    <div style='margin-top: 20px;'>
+        <div style='float: left;'>
+            <input type="button" value="Export to Excel" id='excelExport' />
+            <br /><br />
+            <input type="button" value="Export to XML" id='xmlExport' />
+        </div>
+        <div style='margin-left: 10px; float: left;'>
+            <input type="button" value="Export to CSV" id='csvExport' />
+            <br /><br />
+            <input type="button" value="Export to TSV" id='tsvExport' />
+        </div>
+        <div style='margin-left: 10px; float: left;'>
+            <input type="button" value="Export to HTML" id='htmlExport' />
+            <br /><br />
+            <input type="button" value="Export to JSON" id='jsonExport' />
+        </div>
+        <div style='margin-left: 10px; float: left;'>
+            <input type="button" value="Export to PDF" id='pdfExport' />
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var data = {};
+            var firstNames =
+                [
+                    "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
+                ];
+            var lastNames =
+                [
+                    "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+                ];
+            var productNames =
+                [
+                    "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Cramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
+                ];
+            var priceValues =
+                [
+                    "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
+                ];
+            var generaterow = function () {
+                var row = {};
+                var productindex = Math.floor(Math.random() * productNames.length);
+                var price = parseFloat(priceValues[productindex]);
+                var quantity = 1 + Math.round(Math.random() * 10);
+                row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
+                row["lastname"] = lastNames[Math.floor(Math.random() * lastNames.length)];
+                row["productname"] = productNames[productindex];
+                row["price"] = price;
+                row["quantity"] = quantity;
+                row["total"] = price * quantity;
+                return row;
+            };
+            for (var i = 0; i < 30; i++) {
+                var row = generaterow();
+                data[i] = row;
+            }
+            var source =
+            {
+                localdata: data,
+                datatype: "local",
+                datafields:
+                    [
+                        { name: 'firstname', type: 'string' },
+                        { name: 'lastname', type: 'string' },
+                        { name: 'productname', type: 'string' },
+                        { name: 'quantity', type: 'number' },
+                        { name: 'price', type: 'number' },
+                        { name: 'total', type: 'number' }
+                    ],
+                addrow: function (rowid, rowdata, position, commit) {
+                    commit(true);
+                },
+                deleterow: function (rowid, commit) {
+                    commit(true);
+                },
+                updaterow: function (rowid, newdata, commit) {
+                    commit(true);
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#grid").jqxGrid(
+                {
+                    width: 1000,
+                    source: dataAdapter,
+                    altrows: true,
+                    sortable: true,
+                    columns: [
+                        { text: 'First Name', datafield: 'firstname', width: 200 },
+                        { text: 'Last Name', datafield: 'lastname', width: 200 },
+                        { text: 'Product', datafield: 'productname', width: 180 },
+                        { text: 'Quantity', datafield: 'quantity', width: 80, cellsalign: 'right' },
+                        { text: 'Unit Price', datafield: 'price', width: 90, cellsalign: 'right', cellsformat: 'c2' },
+                        { text: 'Total', datafield: 'total', cellsalign: 'right', cellsformat: 'c2' }
+                    ]
+                });
+            $("#excelExport").jqxButton();
+            $("#xmlExport").jqxButton();
+            $("#csvExport").jqxButton();
+            $("#tsvExport").jqxButton();
+            $("#htmlExport").jqxButton();
+            $("#jsonExport").jqxButton();
+            $("#pdfExport").jqxButton();
+            $("#excelExport").click(function () {
+                $("#grid").jqxGrid('exportdata', 'xls', 'jqxGrid');
+            });
+            $("#xmlExport").click(function () {
+                $("#grid").jqxGrid('exportdata', 'xml', 'jqxGrid');
+            });
+            $("#csvExport").click(function () {
+                $("#grid").jqxGrid('exportdata', 'csv', 'jqxGrid');
+            });
+            $("#tsvExport").click(function () {
+                $("#grid").jqxGrid('exportdata', 'tsv', 'jqxGrid');
+            });
+            $("#htmlExport").click(function () {
+                $("#grid").jqxGrid('exportdata', 'html', 'jqxGrid');
+            });
+            $("#jsonExport").click(function () {
+                $("#grid").jqxGrid('exportdata', 'json', 'jqxGrid');
+            });
+            $("#pdfExport").click(function () {
+                $("#grid").jqxGrid('exportdata', 'pdf', 'jqxGrid');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

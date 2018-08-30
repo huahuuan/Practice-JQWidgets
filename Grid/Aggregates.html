@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- JQWidgets -->
+    <link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css">
+    <script src="https://jqwidgets.com/public/jqwidgets/jqx-all.js"></script>
+</head>
+
+<body>
+
+    <div id="grid"></div>
+
+    <script>
+        $(document).ready(function () {
+            var data = {};
+            var firstNames =
+                [
+                    "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
+                ];
+            var lastNames =
+                [
+                    "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+                ];
+            var productNames =
+                [
+                    "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Cramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
+                ];
+            var priceValues =
+                [
+                    "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
+                ];
+            var generaterow = function () {
+                var row = {};
+                var productindex = Math.floor(Math.random() * productNames.length);
+                var price = parseFloat(priceValues[productindex]);
+                var quantity = 1 + Math.round(Math.random() * 10);
+                row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
+                row["lastname"] = lastNames[Math.floor(Math.random() * lastNames.length)];
+                row["productname"] = productNames[productindex];
+                row["price"] = price;
+                row["quantity"] = quantity;
+                row["total"] = price * quantity;
+                return row;
+            };
+            for (var i = 0; i < 30; i++) {
+                var row = generaterow();
+                data[i] = row;
+            }
+            var source =
+            {
+                localdata: data,
+                datatype: "local",
+                datafields:
+                    [
+                        { name: 'firstname', type: 'string' },
+                        { name: 'lastname', type: 'string' },
+                        { name: 'productname', type: 'string' },
+                        { name: 'quantity', type: 'number' },
+                        { name: 'price', type: 'number' },
+                        { name: 'total', type: 'number' }
+                    ],
+                addrow: function (rowid, rowdata, position, commit) {
+                    commit(true);
+                },
+                deleterow: function (rowid, commit) {
+                    commit(true);
+                },
+                updaterow: function (rowid, newdata, commit) {
+                    commit(true);
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#grid").jqxGrid(
+                {
+                    width: 1000,
+                    source: dataAdapter,
+                    groupable: true,
+                    selectionmode: 'singlecell',
+                    showgroupaggregates: true,
+                    showstatusbar: true,
+                    showaggregates: true,
+                    statusbarheight: 25,
+                    groups: ['price'],
+                    columns: [
+                        { text: 'First Name', columntype: 'textbox', datafield: 'firstname', width: 120 },
+                        { text: 'Last Name', datafield: 'lastname', columntype: 'textbox', width: 120 },
+                        { text: 'Product', columntype: 'dropdownlist', datafield: 'productname', width: 195 },
+                        { text: 'Quantity', datafield: 'quantity', aggregates: ["sum"], width: 70, cellsalign: 'right' },
+                        { text: 'Price', datafield: 'price', aggregates: ["sum"], cellsalign: 'right', width: 100, cellsformat: 'c2' },
+
+                        {
+                            text: 'Total', datafield: 'total', aggregates: ["sum"], cellsalign: 'right', cellsformat: 'c2',
+                            cellsrenderer: function (row, column, value, defaultRender, column, rowData) {
+                                if (value.toString().indexOf("Sum") >= 0) {
+                                    return defaultRender.replace("Sum", "Total");
+                                }
+                            },
+                            aggregatesrenderer: function (aggregates, column, element) {
+                                var renderstring = '<div style="position: relative; margin-top: 4px; margin-right:5px; text-align: right; overflow: hidden;">' + "Total" + ': ' + aggregates.sum + '</div>';
+                                return renderstring;
+                            }
+                        }
+                    ]
+                });
+        });
+    </script>
+
+</body>
+
+</html>

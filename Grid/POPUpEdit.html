@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- JQWidgets -->
+    <link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css">
+    <script src="https://jqwidgets.com/public/jqwidgets/jqx-all.js"></script>
+</head>
+
+<body>
+
+    <div id="grid"></div>
+
+    <script>
+        $(document).ready(function () {
+            var data = {};
+            var firstNames =
+                [
+                    "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
+                ];
+            var lastNames =
+                [
+                    "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+                ];
+            var productNames =
+                [
+                    "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Cramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
+                ];
+            var priceValues =
+                [
+                    "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
+                ];
+            var generaterow = function () {
+                var row = {};
+                var productindex = Math.floor(Math.random() * productNames.length);
+                var price = parseFloat(priceValues[productindex]);
+                var quantity = 1 + Math.round(Math.random() * 10);
+                row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
+                row["lastname"] = lastNames[Math.floor(Math.random() * lastNames.length)];
+                row["productname"] = productNames[productindex];
+                row["price"] = price;
+                row["quantity"] = quantity;
+                return row;
+            };
+            for (var i = 0; i < 30; i++) {
+                var row = generaterow();
+                data[i] = row;
+            }
+            var source =
+            {
+                localdata: data,
+                datatype: "local",
+                datafields:
+                    [
+                        { name: 'firstname', type: 'string' },
+                        { name: 'lastname', type: 'string' },
+                        { name: 'productname', type: 'string' },
+                        { name: 'quantity', type: 'number' },
+                        { name: 'price', type: 'number' }
+                    ],
+                addrow: function (rowid, rowdata, position, commit) {
+                    commit(true);
+                },
+                deleterow: function (rowid, commit) {
+                    commit(true);
+                },
+                updaterow: function (rowid, newdata, commit) {
+                    commit(true);
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#grid").jqxGrid(
+                {
+                    width: 1000,
+                    source: dataAdapter,
+                    editable: true,
+                    enabletooltips: true,
+                    selectionmode: 'multiplecellsadvanced',
+                    columns: [
+                        { text: 'First Name', columntype: 'textbox', datafield: 'firstname', width: 120 },
+                        { text: 'Last Name', datafield: 'lastname', columntype: 'textbox', width: 120 },
+                        { text: 'Product', columntype: 'dropdownlist', datafield: 'productname', width: 195 },
+                        { text: 'Available', datafield: 'available', columntype: 'checkbox', width: 67 },
+                        {
+                            text: 'Quantity', datafield: 'quantity', width: 70, align: 'right', cellsalign: 'right', columntype: 'numberinput',
+                            validation: function (cell, value) {
+                                if (value < 0 || value > 150) {
+                                    return { result: false, message: "Quantity should be in the 0-150 interval" };
+                                }
+                                return true;
+                            },
+                            createeditor: function (row, cellvalue, editor) {
+                                editor.jqxNumberInput({ decimalDigits: 0, digits: 3 });
+                            }
+                        },
+                        {
+                            text: 'Price', datafield: 'price', align: 'right', cellsalign: 'right', cellsformat: 'c2', columntype: 'numberinput',
+                            validation: function (cell, value) {
+                                if (value < 0 || value > 15) {
+                                    return { result: false, message: "Price should be in the 0-15 interval" };
+                                }
+                                return true;
+                            },
+                            createeditor: function (row, cellvalue, editor) {
+                                editor.jqxNumberInput({ digits: 3 });
+                            }
+                        }
+                    ]
+                });
+        });
+    </script>
+
+</body>
+
+</html>

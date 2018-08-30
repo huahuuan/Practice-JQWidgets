@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- JQWidgets -->
+    <link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css">
+    <script src="https://jqwidgets.com/public/jqwidgets/jqx-all.js"></script>
+
+    <script type="text/javascript">
+            var test;
+
+        $(document).ready(function () {
+            var numberrenderer = function (row, column, value) {
+                return '<div style="text-align: center; margin-top: 5px;">' + (1 + value) + '</div>';
+            }
+            var datafields = [];
+            var columns = [];
+            for (var i = 0; i < 26; i++) {
+                var text = String.fromCharCode(65 + i);
+                if (i == 0) {
+                    var cssclass = 'jqx-widget-header';
+                    columns[columns.length] = { pinned: true, exportable: false, text: "", columntype: 'number', cellclassname: cssclass, cellsrenderer: numberrenderer };
+                }
+                datafields[datafields.length] = { name: text };
+                columns[columns.length] = { text: text, datafield: text, width: 60, align: 'center' };
+            }
+            var source =
+            {
+                unboundmode: true,
+                totalrecords: 100,
+                datafields: datafields,
+                updaterow: function (rowid, rowdata) {
+                    test = rowdata;
+                    console.log("UPDATE => " + rowid + "," + rowdata);
+                }
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            $("#grid").jqxGrid(
+                {
+                    width: 600,
+                    source: dataAdapter,
+                    editable: true,
+                    columnsresize: true,
+                    selectionmode: 'multiplecellsadvanced',
+                    columns: columns
+                });
+            $("#excelExport").click(function () {
+                $("#grid").jqxGrid('exportdata', 'xls', 'jqxGrid', false);
+            });
+        });
+    </script>
+</head>
+
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id="grid"></div>
+        <div style='margin-top: 20px;'>
+            <div style='float: left;'>
+                <input type="button" value="Export to Excel" id='excelExport' />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
