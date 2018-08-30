@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- JQWidgets -->
+    <link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css">
+    <script src="https://jqwidgets.com/public/jqwidgets/jqx-all.js"></script>
+</head>
+
+<body>
+    <div id='content'>
+        <div id='jqxWidget' style='height: 300px;'>
+            <div id='jqxMenu' style="visibility: hidden;">
+                <ul>
+                    <li>
+                        <img style='float: left; margin-right: 5px;' src='./mailIcon.png' /><span>Mail</span>
+                    </li>
+                    <li>
+                        <img style='float: left; margin-right: 5px;' src='./folder.png' /><span>Inbox</span>
+                        <ul>
+                            <li>
+                                <img style='float: left; margin-right: 5px;' src='./folder.png' /><span>jQWidgets</span>
+                                <ul>
+                                    <li>
+                                        <img style='float: left; margin-right: 5px;' src='./folder.png' /><span>Admin</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create a jqxMenu
+            $("#jqxMenu").jqxMenu({ width: '150px', height: '225px', mode: 'vertical' });
+            $("#jqxMenu").css('visibility', 'visible');
+            // create checkboxes
+        });
+    </script>
+
+</body>
+
+</html>
