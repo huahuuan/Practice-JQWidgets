@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- JQWidgets -->
+    <link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css">
+    <script src="https://jqwidgets.com/public/jqwidgets/jqx-all.js"></script>
+</head>
+
+<body>
+
+    <div id="navBar1">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+        </ul>
+    </div>
+    <br />
+    <div id="navBar2">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+    </div>
+    <br />
+    <div id="navBar3">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+    <br />
+    <div id="navBar4">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+    <br />
+    <div id="navBar5">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+        </ul>
+    </div>
+    <br />
+    <div id="navBar6">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#navBar1, #navBar2, #navBar3, #navBar4").jqxNavBar({
+                height: 40, selectedItem: 0
+            });
+            $("#navBar5").jqxNavBar({ height: 160, selectedItem: 0 });
+            $("#navBar6").jqxNavBar({ height: 40, columns: ['30%', '50%', '20%'], selectedItem: 0 });
+        });
+    </script>
+
+</body>
+
+</html>
