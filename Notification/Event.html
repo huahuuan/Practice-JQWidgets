@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- JQWidgets -->
+    <link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css">
+    <script src="https://jqwidgets.com/public/jqwidgets/jqx-all.js"></script>
+</head>
+
+<body>
+
+    <div id="jqxNotification">
+        <div>You have <b>2</b> new messages.</div>
+        <div style="font-size: smaller; text-align: center;">Click to view.</div>
+    </div>
+    
+    <button id="checkMail">
+        Check mail</button>
+    <div id="eventsPanel">
+    </div>
+    <div id="messagePanel" style="width: 400px; display: none;">
+        <p>
+            <b>From:</b> Ken</p>
+        <p>
+            <b>About</b>: Appointment</p>
+        <p>
+            Hi,<br /> I just wanted to remind you dinner is at 8pm tonight at Carl's.</p>
+        <hr style="width: 400px;" />
+        <p>
+            <b>From:</b> Sue</p>
+        <p>
+            <b>About</b>: Shopping</p>
+        <p>
+            Here's the shopping list for tommorow's party:</p>
+        <ul>
+            <li>Wine</li>
+            <li>Tomatoes</li>
+            <li>Cheese</li>
+            <li>Popcorn</li>
+        </ul>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#jqxNotification").jqxNotification({
+                width: "auto", position: "top-right", opacity: 0.9,
+                closeOnClick: true, autoClose: false, showCloseButton: true, template: "mail", blink: true
+            });
+            $("#checkMail").jqxButton();
+            $("#checkMail").click(function () {
+                $("#jqxNotification").jqxNotification("open");
+            });
+            $("#jqxNotification").on("click", function (event) {
+                $("#messagePanel").fadeIn();
+            });
+        });
+    </script>
+
+</body>
+
+</html>
