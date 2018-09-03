@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- JQWidgets -->
+    <link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css">
+    <script src="https://jqwidgets.com/public/jqwidgets/jqx-all.js"></script>
+</head>
+
+<body>
+
+    <div id='jqxWidget'>
+        <div style='float: left;'>
+            <div id='treeA' style='visibility: hidden; float: left; margin-left: 0px;'>
+                <ul>
+                    <li id='home' item-selected='true'>Home</li>
+                    <li item-expanded='true'>Solutions
+                        <ul>
+                            <li>Education</li>
+                        </ul>
+                    </li>
+                    <li>Financial services</li>
+                    <li>Community</li>
+                </ul>
+            </div>
+            <div style='visibility: hidden; float: left; margin-left: 20px;' id="treeB">
+                <ul>
+                    <li>Products
+                    </li>
+                    <li item-expanded='true'>Support
+                        <ul>
+                            <li>Support home</li>
+                            <li>Customer Service</li>
+                        </ul>
+                    </li>
+                    <li>Knowledge base</li>
+                    <li>Forum</li>
+                </ul>
+            </div>
+            <div style="width: 200px; height: 200px; float: left; margin-left: 20px;">
+                <textarea rows="5" id="textarea"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#treeA').jqxTree({
+                allowDrag: true, allowDrop: true, height: '300px', width: '220px',
+                dragStart: function (item) {
+                    if (item.label == "Community")
+                        return false;
+                }
+            });
+            $('#treeB').jqxTree({
+                allowDrag: true, allowDrop: true, height: '300px', width: '220px',
+                dragEnd: function (item, dropItem, args, dropPosition, tree) {
+                    if (item.label == "Forum")
+                        return false;
+                }
+            });
+            $('#treeA').css('visibility', 'visible');
+            $('#treeB').css('visibility', 'visible');
+            $("#treeA, #treeB").on('dragStart', function (event) {
+                // DragStart
+            });
+            $("#treeA, #treeB").on('dragEnd', function (event) {
+                // DragEnd
+                if (event.args.label) {
+                    var ev = event.args.originalEvent;
+                    var x = ev.pageX;
+                    var y = ev.pageY;
+                    if (event.args.originalEvent && event.args.originalEvent.originalEvent && event.args.originalEvent.originalEvent.touches) {
+                        var touch = event.args.originalEvent.originalEvent.changedTouches[0];
+                        x = touch.pageX;
+                        y = touch.pageY;
+                    }
+                    var offset = $("#textarea").offset();
+                    var width = $("#textarea").width();
+                    var height = $("#textarea").height();
+                    var right = parseInt(offset.left) + width;
+                    var bottom = parseInt(offset.top) + height;
+                    if (x >= parseInt(offset.left) && x <= right) {
+                        if (y >= parseInt(offset.top) && y <= bottom) {
+                            $("#textarea").val(event.args.label);
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
