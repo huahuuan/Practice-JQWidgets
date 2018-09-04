@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- JQWidgets -->
+    <link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css">
+    <script src="https://jqwidgets.com/public/jqwidgets/jqx-all.js"></script>
+</head>
+
+<body>
+
+    <div id='calendar'></div>
+
+    <script>
+        $(document).ready(function () {
+            $("#calendar").jqxCalendar({ value: new Date(2017, 7, 6), width: 220, height: 220, selectionMode: "range" });
+
+            var date1 = new Date();
+            date1.setFullYear(2017, 7, 7);
+            var date2 = new Date();
+            date2.setFullYear(2017, 7, 15);
+
+            $("#calendar").jqxCalendar('setRange', date1, date2);
+        });
+    </script>
+
+</body>
+
+</html>
