@@ -12,8 +12,13 @@
     <div id='calendar'></div>
 
     <script>
-        $(document).ready(function () {
-            $("#calendar").jqxCalendar({ value: new Date(2017, 7, 6), width: 220, height: 220, selectionMode: "range" });
+        $(document).ready(() => {
+            $("#calendar").jqxCalendar({
+                value: new Date(2017, 7, 6),
+                width: 220,
+                height: 220,
+                selectionMode: "range"
+            });
 
             var date1 = new Date();
             date1.setFullYear(2017, 7, 7);

@@ -107,59 +107,96 @@
             </div>
         </div>
     </div>
-    
+
     <script>
-        $(document).ready(function () {
-            $("#jqxMenu").jqxMenu({ width: 600, height: '30px' });
+        $(document).ready(() => {
+            $("#jqxMenu").jqxMenu({
+                width: 600,
+                height: '30px'
+            });
             $("#jqxMenu").css('visibility', 'visible');
-            $("#disabled").jqxCheckBox({ width: '150px', height: '20px' });
-            $("#open").jqxCheckBox({ width: '150px', height: '20px' });
-            $("#hover").jqxCheckBox({ width: '150px', height: '20px' });
-            $("#topLevelArrows").jqxCheckBox({ width: '200px', height: '20px' });
-            $("#animation").jqxCheckBox({ width: '150px', height: '20px' });
-            $("#animation").on('change', function (event) {
+            $("#disabled").jqxCheckBox({
+                width: '150px',
+                height: '20px'
+            });
+            $("#open").jqxCheckBox({
+                width: '150px',
+                height: '20px'
+            });
+            $("#hover").jqxCheckBox({
+                width: '150px',
+                height: '20px'
+            });
+            $("#topLevelArrows").jqxCheckBox({
+                width: '200px',
+                height: '20px'
+            });
+            $("#animation").jqxCheckBox({
+                width: '150px',
+                height: '20px'
+            });
+            $("#animation").on('change', (event) => {
                 var value = event.args.checked;
                 if (!value) {
-                    $("#jqxMenu").jqxMenu({ animationShowDuration: 0, animationHideDuration: 0, animationShowDelay: 0 });
-                }
-                else {
-                    $("#jqxMenu").jqxMenu({ animationShowDuration: 300, animationHideDuration: 200, animationShowDelay: 200 });
+                    $("#jqxMenu").jqxMenu({
+                        animationShowDuration: 0,
+                        animationHideDuration: 0,
+                        animationShowDelay: 0
+                    });
+                } else {
+                    $("#jqxMenu").jqxMenu({
+                        animationShowDuration: 300,
+                        animationHideDuration: 200,
+                        animationShowDelay: 200
+                    });
                 }
             });
-            $("#disabled").on('change', function (event) {
+            $("#disabled").on('change', (event) => {
                 var value = event.args.checked;
                 if (!value) {
-                    $("#jqxMenu").jqxMenu({ disabled: false });
-                }
-                else {
-                    $("#jqxMenu").jqxMenu({ disabled: true });
+                    $("#jqxMenu").jqxMenu({
+                        disabled: false
+                    });
+                } else {
+                    $("#jqxMenu").jqxMenu({
+                        disabled: true
+                    });
                 }
             });
-            $("#hover").on('change', function (event) {
+            $("#hover").on('change', (event) => {
                 var value = event.args.checked;
                 if (!value) {
-                    $("#jqxMenu").jqxMenu({ enableHover: false });
-                }
-                else {
-                    $("#jqxMenu").jqxMenu({ enableHover: true });
+                    $("#jqxMenu").jqxMenu({
+                        enableHover: false
+                    });
+                } else {
+                    $("#jqxMenu").jqxMenu({
+                        enableHover: true
+                    });
                 }
             });
-            $("#open").on('change', function (event) {
+            $("#open").on('change', (event) => {
                 var value = event.args.checked;
                 if (!value) {
-                    $("#jqxMenu").jqxMenu({ autoOpen: false });
-                }
-                else {
-                    $("#jqxMenu").jqxMenu({ autoOpen: true });
+                    $("#jqxMenu").jqxMenu({
+                        autoOpen: false
+                    });
+                } else {
+                    $("#jqxMenu").jqxMenu({
+                        autoOpen: true
+                    });
                 }
             });
-            $("#topLevelArrows").on('change', function (event) {
+            $("#topLevelArrows").on('change', (event) => {
                 var value = event.args.checked;
                 if (!value) {
-                    $("#jqxMenu").jqxMenu({ showTopLevelArrows: false });
-                }
-                else {
-                    $("#jqxMenu").jqxMenu({ showTopLevelArrows: true });
+                    $("#jqxMenu").jqxMenu({
+                        showTopLevelArrows: false
+                    });
+                } else {
+                    $("#jqxMenu").jqxMenu({
+                        showTopLevelArrows: true
+                    });
                 }
             });
         });

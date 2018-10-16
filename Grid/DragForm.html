@@ -44,7 +44,7 @@
     </div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             var data = {};
             var firstNames =
                 [
@@ -62,7 +62,7 @@
                 [
                     "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
                 ];
-            var generaterow = function () {
+            var generaterow = () => {
                 var row = {};
                 var productindex = Math.floor(Math.random() * productNames.length);
                 var price = parseFloat(priceValues[productindex]);
@@ -90,13 +90,13 @@
                         { name: 'quantity', type: 'number' },
                         { name: 'price', type: 'number' }
                     ],
-                addrow: function (rowid, rowdata, position, commit) {
+                addrow: (rowid, rowdata, position, commit) => {
                     commit(true);
                 },
-                deleterow: function (rowid, commit) {
+                deleterow: (rowid, commit) => {
                     commit(true);
                 },
-                updaterow: function (rowid, newdata, commit) {
+                updaterow: (rowid, newdata, commit) => {
                     commit(true);
                 }
             };
@@ -110,7 +110,7 @@
                 { text: 'Price', dataField: 'price', width: 150 }
 
             ];
-            $("#grid").on('rowclick', function () {
+            $("#grid").on('rowclick', () => {
                 $("#grid").jqxGrid('focus');
             });
 
@@ -122,7 +122,7 @@
                     pageable: true,
                     sortable: true,
                     columns: columns,
-                    rendered: function () {
+                    rendered: () => {
                         var gridCells = $('#grid').find('.jqx-grid-cell');
                         if ($('#grid').jqxGrid('groups').length > 0) {
                             gridCells = $('#grid').find('.jqx-grid-group-cell');
@@ -131,14 +131,14 @@
                         gridCells.jqxDragDrop({
                             appendTo: 'body', dragZIndex: 99999,
                             dropAction: 'none',
-                            initFeedback: function (feedback) {
+                            initFeedback: (feedback) => {
                                 feedback.height(115);
                                 feedback.width(300);
                             }
                         });
 
                         gridCells.off('dragStart');
-                        gridCells.on('dragStart', function (event) {
+                        gridCells.on('dragStart',  (event) => {
                             var value = $(this).text();
                             var position = $.jqx.position(event.args);
                             var cell = $("#grid").jqxGrid('getcellatposition', position.left, position.top);
@@ -148,7 +148,7 @@
                             var feedback = $(this).jqxDragDrop('feedback');
                             var feedbackContent = $(this).parent().clone();
                             var table = '<table>';
-                            $.each(feedbackContent.children(), function (index) {
+                            $.each(feedbackContent.children(),  (index) => {
                                 if (index < groupslength)
                                     return true;
                                 table += '<tr>';
@@ -164,7 +164,7 @@
                             feedback.html(table);
                         });
                         gridCells.off('dragEnd');
-                        gridCells.on('dragEnd', function (event) {
+                        gridCells.on('dragEnd', (event) => {
                             var value = $(this).jqxDragDrop('data');
                             var position = $.jqx.position(event.args);
                             var pageX = position.left;

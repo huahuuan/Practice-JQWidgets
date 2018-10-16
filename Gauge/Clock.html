@@ -16,7 +16,7 @@
     </div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             var hours = new Date().getHours(),
                 minutes = new Date().getMinutes(),
                 seconds = new Date().getSeconds(),
@@ -35,32 +35,79 @@
                     12: 'XII'
                 };
             $('#minutes').jqxGauge({
-                ticksMinor: { visible: false },
-                ticksMajor: { visible: false },
-                labels: { visible: false },
+                ticksMinor: {
+                    visible: false
+                },
+                ticksMajor: {
+                    visible: false
+                },
+                labels: {
+                    visible: false
+                },
                 animationDuration: 0,
-                min: 0, max: 12,
-                border: { style: { fill: 'none', stroke: 'none' }, showGradient: false },
-                caption: { value: '' },
+                min: 0,
+                max: 12,
+                border: {
+                    style: {
+                        fill: 'none',
+                        stroke: 'none'
+                    },
+                    showGradient: false
+                },
+                caption: {
+                    value: ''
+                },
                 colorScheme: 'scheme05',
-                style: { fill: 'none', stroke: 'none' },
-                pointer: { length: '70%', width: '2%' },
-                cap: { style: { fill: '#249dd6', stroke: '#249dd6' } },
+                style: {
+                    fill: 'none',
+                    stroke: 'none'
+                },
+                pointer: {
+                    length: '70%',
+                    width: '2%'
+                },
+                cap: {
+                    style: {
+                        fill: '#249dd6',
+                        stroke: '#249dd6'
+                    }
+                },
                 startAngle: -90,
                 endAngle: 270,
                 value: (minutes / 60) * 12
             });
             $('#hours').jqxGauge({
-                ticksMinor: { visible: false },
-                ticksMajor: { visible: false },
-                labels: { visible: false },
+                ticksMinor: {
+                    visible: false
+                },
+                ticksMajor: {
+                    visible: false
+                },
+                labels: {
+                    visible: false
+                },
                 animationDuration: 0,
-                min: 0, max: 12,
-                caption: { value: '' },
-                border: { style: { fill: 'none', stroke: 'none' }, showGradient: false },
+                min: 0,
+                max: 12,
+                caption: {
+                    value: ''
+                },
+                border: {
+                    style: {
+                        fill: 'none',
+                        stroke: 'none'
+                    },
+                    showGradient: false
+                },
                 colorScheme: 'scheme05',
-                pointer: { length: '50%', width: '3%' },
-                style: { fill: 'none', stroke: 'none' },
+                pointer: {
+                    length: '50%',
+                    width: '3%'
+                },
+                style: {
+                    fill: 'none',
+                    stroke: 'none'
+                },
                 value: hours % 12 + (minutes / 60 * 11) / 12,
                 startAngle: -90,
                 endAngle: 270
@@ -90,23 +137,37 @@
                 labels: {
                     distance: '28%',
                     interval: 1,
-                    formatValue: function (val) {
+                    formatValue: (val) => {
                         if (val == 0) {
                             return '';
                         }
                         return digits[val];
                     }
                 },
-                pointer: { length: '80%', width: '1.7%' },
+                pointer: {
+                    length: '80%',
+                    width: '1.7%'
+                },
                 ranges: [],
-                caption: { value: 'GUCCI', offset: [0, -30] },
-                animationDuration: 0, min: 0, max: 12,
-                border: { fill: 'none', stroke: 'none' },
+                caption: {
+                    value: 'GUCCI',
+                    offset: [0, -30]
+                },
+                animationDuration: 0,
+                min: 0,
+                max: 12,
+                border: {
+                    fill: 'none',
+                    stroke: 'none'
+                },
                 colorScheme: 'scheme05',
-                style: { fill: '#ffffff', stroke: '#cccccc' },
+                style: {
+                    fill: '#ffffff',
+                    stroke: '#cccccc'
+                },
                 value: (seconds / 60) * 12
             });
-            setInterval(function () {
+            setInterval(() => {
                 var seconds = $('#seconds').jqxGauge('value'),
                     minutes = $('#minutes').jqxGauge('value'),
                     hours = $('#hours').jqxGauge('value'),
@@ -116,19 +177,19 @@
                     seconds = ratio;
                 }
                 $('#seconds').jqxGauge('value', seconds);
-            if (seconds === ratio) {
-                minutes += ratio;
-                if (minutes >= 12) {
-                    minutes = ratio;
+                if (seconds === ratio) {
+                    minutes += ratio;
+                    if (minutes >= 12) {
+                        minutes = ratio;
+                    }
+                    $('#minutes').jqxGauge('value', minutes);
+                    hours += 1 / 60;
+                    if (hours > 12) {
+                        hours = 1 / 60;
+                    }
+                    $('#hours').jqxGauge('value', hours);
                 }
-                $('#minutes').jqxGauge('value', minutes);
-                hours += 1 / 60;
-                if (hours > 12) {
-                    hours = 1 / 60;
-                }
-                $('#hours').jqxGauge('value', hours);
-            }
-        }, 1000);
+            }, 1000);
         });
     </script>
 

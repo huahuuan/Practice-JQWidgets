@@ -20,7 +20,7 @@
     <button id="openTimeNotification" style="margin-top: 10px;">Open a current time notification</button>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             $("#messageNotification").jqxNotification({
                 width: 250, position: "top-right", opacity: 0.9,
                 autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 1500, template: "info"
@@ -30,10 +30,10 @@
                 autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 1500, template: "time"
             });
             $("#openMessageNotification, #openTimeNotification").jqxButton({ width: 230, height: 30 });
-            $("#openMessageNotification").click(function () {
+            $("#openMessageNotification").click(() => {
                 $("#messageNotification").jqxNotification("open");
             });
-            $("#openTimeNotification").click(function () {
+            $("#openTimeNotification").click(() => {
                 var date = new Date();
                 var minutes = date.getMinutes();
                 if (minutes < 10) {

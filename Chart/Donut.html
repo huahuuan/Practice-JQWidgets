@@ -13,18 +13,26 @@
     <div id='chartContainer' style="width:850px; height:500px"></div>
 
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(() => {
             // prepare chart data as an array
-            var source =
-            {
+            var source = {
                 datatype: "csv",
-                datafields: [
-                    { name: 'Browser' },
-                    { name: 'Share' }
+                datafields: [{
+                        name: 'Browser'
+                    },
+                    {
+                        name: 'Share'
+                    }
                 ],
                 url: './Pie.txt'
             };
-            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                async: false,
+                autoBind: true,
+                loadError: (xhr, status, error) => {
+                    alert('Error loading "' + source.url + '" : ' + error);
+                }
+            });
             // prepare jqxChart settings
             var settings = {
                 title: "Desktop browsers share",
@@ -32,31 +40,43 @@
                 enableAnimations: true,
                 showLegend: false,
                 showBorderLine: true,
-                legendPosition: { left: 520, top: 140, width: 100, height: 100 },
-                padding: { left: 5, top: 5, right: 5, bottom: 5 },
-                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                legendPosition: {
+                    left: 520,
+                    top: 140,
+                    width: 100,
+                    height: 100
+                },
+                padding: {
+                    left: 5,
+                    top: 5,
+                    right: 5,
+                    bottom: 5
+                },
+                titlePadding: {
+                    left: 0,
+                    top: 0,
+                    right: 0,
+                    bottom: 10
+                },
                 source: dataAdapter,
                 colorScheme: 'scheme02',
-                seriesGroups:
-                    [
-                        {
-                            type: 'donut',
-                            showLabels: true,
-                            series:
-                                [
-                                    {
-                                        dataField: 'Share',
-                                        displayText: 'Browser',
-                                        labelRadius: 120,
-                                        initialAngle: 15,
-                                        radius: 170,
-                                        innerRadius: 70,
-                                        centerOffset: 0,
-                                        formatSettings: { sufix: '%', decimalPlaces: 1 }
-                                    }
-                                ]
+                seriesGroups: [{
+                    type: 'donut',
+                    showLabels: true,
+                    series: [{
+                        dataField: 'Share',
+                        displayText: 'Browser',
+                        labelRadius: 120,
+                        initialAngle: 15,
+                        radius: 170,
+                        innerRadius: 70,
+                        centerOffset: 0,
+                        formatSettings: {
+                            sufix: '%',
+                            decimalPlaces: 1
                         }
-                    ]
+                    }]
+                }]
             };
             // setup the chart
             $('#chartContainer').jqxChart(settings);

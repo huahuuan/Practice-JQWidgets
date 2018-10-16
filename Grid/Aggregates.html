@@ -12,7 +12,7 @@
     <div id="grid"></div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             var data = {};
             var firstNames =
                 [
@@ -30,7 +30,7 @@
                 [
                     "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
                 ];
-            var generaterow = function () {
+            var generaterow = () => {
                 var row = {};
                 var productindex = Math.floor(Math.random() * productNames.length);
                 var price = parseFloat(priceValues[productindex]);
@@ -60,13 +60,13 @@
                         { name: 'price', type: 'number' },
                         { name: 'total', type: 'number' }
                     ],
-                addrow: function (rowid, rowdata, position, commit) {
+                addrow: (rowid, rowdata, position, commit) => {
                     commit(true);
                 },
-                deleterow: function (rowid, commit) {
+                deleterow: (rowid, commit) => {
                     commit(true);
                 },
-                updaterow: function (rowid, newdata, commit) {
+                updaterow: (rowid, newdata, commit) => {
                     commit(true);
                 }
             };
@@ -92,12 +92,12 @@
 
                         {
                             text: 'Total', datafield: 'total', aggregates: ["sum"], cellsalign: 'right', cellsformat: 'c2',
-                            cellsrenderer: function (row, column, value, defaultRender, column, rowData) {
+                            cellsrenderer: (row, column, value, defaultRender, column, rowData) => {
                                 if (value.toString().indexOf("Sum") >= 0) {
                                     return defaultRender.replace("Sum", "Total");
                                 }
                             },
-                            aggregatesrenderer: function (aggregates, column, element) {
+                            aggregatesrenderer: (aggregates, column, element) => {
                                 var renderstring = '<div style="position: relative; margin-top: 4px; margin-right:5px; text-align: right; overflow: hidden;">' + "Total" + ': ' + aggregates.sum + '</div>';
                                 return renderstring;
                             }

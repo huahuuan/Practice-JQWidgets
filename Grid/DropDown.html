@@ -13,25 +13,25 @@
     </div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             var data = {};
-            var firstNames =
-                [
-                    "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
-                ];
-            var lastNames =
-                [
-                    "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
-                ];
-            var productNames =
-                [
-                    "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Cramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
-                ];
-            var priceValues =
-                [
-                    "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
-                ];
-            var generaterow = function () {
+            var firstNames = [
+                "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars",
+                "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
+            ];
+            var lastNames = [
+                "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson",
+                "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+            ];
+            var productNames = [
+                "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte",
+                "White Chocolate Mocha", "Cramel Latte", "Caffe Americano", "Cappuccino",
+                "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
+            ];
+            var priceValues = [
+                "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
+            ];
+            var generaterow = () => {
                 var row = {};
                 var productindex = Math.floor(Math.random() * productNames.length);
                 var price = parseFloat(priceValues[productindex]);
@@ -48,46 +48,84 @@
                 var row = generaterow();
                 data[i] = row;
             }
-            var source =
-            {
+            var source = {
                 localdata: data,
-                datafields:
-                    [
-                        { name: 'firstname', type: 'string' },
-                        { name: 'lastname', type: 'string' },
-                        { name: 'productname', type: 'string' },
-                        { name: 'quantity', type: 'number' },
-                        { name: 'price', type: 'number' }
-                    ],
+                datafields: [{
+                        name: 'firstname',
+                        type: 'string'
+                    },
+                    {
+                        name: 'lastname',
+                        type: 'string'
+                    },
+                    {
+                        name: 'productname',
+                        type: 'string'
+                    },
+                    {
+                        name: 'quantity',
+                        type: 'number'
+                    },
+                    {
+                        name: 'price',
+                        type: 'number'
+                    }
+                ],
                 datatype: "array",
-                updaterow: function (rowid, rowdata) {
+                updaterow: (rowid, rowdata) => {
                     // synchronize with the server - send update command   
                 }
             };
             var dataAdapter = new $.jqx.dataAdapter(source);
-            $("#grid").jqxGrid(
-                {
-                    width: 550,
-                    source: dataAdapter,
-                    pageable: true,
-                    autoheight: true,
-                    columnsresize: true,
-                    columns: [
-                        { text: 'First Name', columntype: 'textbox', datafield: 'firstname', width: 90 },
-                        { text: 'Last Name', datafield: 'lastname', columntype: 'textbox', width: 90 },
-                        { text: 'Product', columntype: 'dropdownlist', datafield: 'productname', width: 180 },
-                        { text: 'Quantity', datafield: 'quantity', width: 70, cellsalign: 'right' },
-                        { text: 'Price', datafield: 'price', cellsalign: 'right', cellsformat: 'c2' }
-                    ]
-                });
+            $("#grid").jqxGrid({
+                width: 550,
+                source: dataAdapter,
+                pageable: true,
+                autoheight: true,
+                columnsresize: true,
+                columns: [{
+                        text: 'First Name',
+                        columntype: 'textbox',
+                        datafield: 'firstname',
+                        width: 90
+                    },
+                    {
+                        text: 'Last Name',
+                        datafield: 'lastname',
+                        columntype: 'textbox',
+                        width: 90
+                    },
+                    {
+                        text: 'Product',
+                        columntype: 'dropdownlist',
+                        datafield: 'productname',
+                        width: 180
+                    },
+                    {
+                        text: 'Quantity',
+                        datafield: 'quantity',
+                        width: 70,
+                        cellsalign: 'right'
+                    },
+                    {
+                        text: 'Price',
+                        datafield: 'price',
+                        cellsalign: 'right',
+                        cellsformat: 'c2'
+                    }
+                ]
+            });
             // initialize jqxGrid
             $("#jqxdropdownbutton").jqxDropDownButton({
-                width: 150, height: 30
+                width: 150,
+                height: 30
             });
-            $("#grid").on('rowselect', function (event) {
+            $("#grid").on('rowselect', (event) => {
                 var args = event.args;
                 var row = $("#grid").jqxGrid('getrowdata', args.rowindex);
-                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 6px;">' + row['firstname'] + ' ' + row['lastname'] + '</div>';
+                var dropDownContent =
+                    '<div style="position: relative; margin-left: 3px; margin-top: 6px;">' + row[
+                        'firstname'] + ' ' + row['lastname'] + '</div>';
                 $("#jqxdropdownbutton").jqxDropDownButton('setContent', dropDownContent);
             });
             $("#grid").jqxGrid('selectrow', 0);

@@ -15,7 +15,7 @@
     <div id='container' style="width: 400px; height: 400px;"></div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             $('#container').jqxKnob({
                 value: 60,
                 min: 0,
@@ -24,12 +24,24 @@
                 endAngle: 420,
                 snapToStep: true,
                 rotation: 'clockwise',
-                style: { stroke: '#dfe3e9', strokeWidth: 3, fill: { color: '#fefefe', gradientType: "linear", gradientStops: [[0, 1], [50, 0.9], [100, 1]] } },
+                style: {
+                    stroke: '#dfe3e9',
+                    strokeWidth: 3,
+                    fill: {
+                        color: '#fefefe',
+                        gradientType: "linear",
+                        gradientStops: [
+                            [0, 1],
+                            [50, 0.9],
+                            [100, 1]
+                        ]
+                    }
+                },
                 labels: {
                     offset: '88%',
                     step: 5,
                     visible: true,
-                    formatFunction: function (label) {
+                    formatFunction: (label) => {
                         if (label == 0)
                             return "Min";
                         if (label == 100)
@@ -53,8 +65,14 @@
                     offset: '0%'
                 },
                 pointer: {
-                    type: 'line', thickness: 4, style: { fill: "#00a4e1", stroke: "#00a4e1" },
-                    size: '70%', offset: '0%'
+                    type: 'line',
+                    thickness: 4,
+                    style: {
+                        fill: "#00a4e1",
+                        stroke: "#00a4e1"
+                    },
+                    size: '70%',
+                    offset: '0%'
                 }
             });
         });

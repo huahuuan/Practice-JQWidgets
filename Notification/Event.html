@@ -41,16 +41,16 @@
     </div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             $("#jqxNotification").jqxNotification({
                 width: "auto", position: "top-right", opacity: 0.9,
                 closeOnClick: true, autoClose: false, showCloseButton: true, template: "mail", blink: true
             });
             $("#checkMail").jqxButton();
-            $("#checkMail").click(function () {
+            $("#checkMail").click(() => {
                 $("#jqxNotification").jqxNotification("open");
             });
-            $("#jqxNotification").on("click", function (event) {
+            $("#jqxNotification").on("click", (event) => {
                 $("#messagePanel").fadeIn();
             });
         });

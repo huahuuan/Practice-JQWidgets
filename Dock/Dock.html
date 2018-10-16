@@ -43,7 +43,8 @@
                                 <div style="padding: 3px; margin: 10px; width: 150px; height: 84px; float: left;">
                                     <img src=".//news_ie6.jpg" alt="IE6" title="IE6" />
                                 </div>
-                                <span style="font-size: 11px;">Microsoft is set to get a little more pushy ensuring you have
+                                <span style="font-size: 11px;">Microsoft is set to get a little more pushy ensuring you
+                                    have
                                     an up-to-date browser and will automatically update Internet Explorer...
                                     <span style="font-size: 8px;">(BBC)</span> </span>
                             </div>
@@ -51,7 +52,8 @@
                                 <div style="padding: 3px; margin: 10px; width: 144px; height: 81px; float: left;">
                                     <img src=".//local.jpg" alt="Tennis" title="Tennis" />
                                 </div>
-                                <span style="font-size: 11px;">The High Court has dismissed a challenge to laws that require
+                                <span style="font-size: 11px;">The High Court has dismissed a challenge to laws that
+                                    require
                                     immigrant spouses to be able to speak English in order to live in the UK...
                                     <span style="font-size: 8px;">(BBC)</span> </span>
                             </div>
@@ -59,7 +61,8 @@
                                 <div style="padding: 3px; margin: 10px; width: 130px; height: 73px; float: left;">
                                     <img src=".//tennis.jpg" alt="Tennis" title="Tennis" />
                                 </div>
-                                <span style="font-size: 11px;">British number one Elena Baltacha says Judy Murray is a "fantastic"
+                                <span style="font-size: 11px;">British number one Elena Baltacha says Judy Murray is a
+                                    "fantastic"
                                     appointment as Great Britain's new Fed Cup captain... <span style="font-size: 8px;">(BBC)</span>
                                 </span>
                             </div>
@@ -79,9 +82,12 @@
                                     <img src=".//leo.jpg" alt="Leo" title="Leo" />
                                 </div>
                                 <h3 style="text-align: center; color: #787878;">Leo</h3>
-                                <span style="font-size: 11px">Individuals born under the zodiac sign of Leo are very good
-                                    looking and have a healthy physique, with a broad forehead. Leo are very intelligent,
-                                    extremely courageous, love their freedom and live by their own rules. Indulgence and
+                                <span style="font-size: 11px">Individuals born under the zodiac sign of Leo are very
+                                    good
+                                    looking and have a healthy physique, with a broad forehead. Leo are very
+                                    intelligent,
+                                    extremely courageous, love their freedom and live by their own rules. Indulgence
+                                    and
                                     extravagance is like second nature to them and they love to... </span>
                             </div>
                         </div>
@@ -101,16 +107,34 @@
     </div>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#docking').jqxDocking({ orientation: 'horizontal', width: 800, mode: 'docked' });
+        $(document).ready(() => {
+            $('#docking').jqxDocking({
+                orientation: 'horizontal',
+                width: 800,
+                mode: 'docked'
+            });
             $('#docking').jqxDocking('disableWindowResize', 'window1');
             $('#docking').jqxDocking('disableWindowResize', 'window2');
             $('#docking').jqxDocking('disableWindowResize', 'window3');
             $('#docking').jqxDocking('disableWindowResize', 'window4');
-            $('#calendar').jqxCalendar({ width: 180, height: 180 });
-            $('#newsTbs').jqxTabs({ width: 375, height: 181, selectedItem: 1 });
-            $('#listbox').jqxListBox({ source: source, width: 375, height: 181 });
-            $('#zodiak').jqxPanel({ width: 375, height: 180 });
+            $('#calendar').jqxCalendar({
+                width: 180,
+                height: 180
+            });
+            $('#newsTbs').jqxTabs({
+                width: 375,
+                height: 181,
+                selectedItem: 1
+            });
+            $('#listbox').jqxListBox({
+                source: source,
+                width: 375,
+                height: 181
+            });
+            $('#zodiak').jqxPanel({
+                width: 375,
+                height: 180
+            });
         });
     </script>
 

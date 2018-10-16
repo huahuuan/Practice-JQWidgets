@@ -81,7 +81,7 @@
     <div id='knobContainer'></div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             var startValue1, startValue2, startValue3;
             startValue1 = startValue2 = startValue3 = 60;
             $('#knobContainer').jqxKnob({
@@ -93,7 +93,9 @@
                 snapToStep: true,
                 pointerGrabAction: 'progressBar',
                 rotation: 'clockwise',
-                style: { fill: '#FFFFFF' },
+                style: {
+                    fill: '#FFFFFF'
+                },
                 marks: {
                     drawAboveProgressBar: true,
                     colorRemaining: 'white',
@@ -105,12 +107,27 @@
                     minorInterval: 5
                 },
                 progressBar: {
-                    style: { fill: '#407ec3', stroke: '#407ec3' },
+                    style: {
+                        fill: '#407ec3',
+                        stroke: '#407ec3'
+                    },
                     size: '18%',
                     offset: '78%',
-                    background: { fill: '#cfd0d4', stroke: '#cfd0d4' }
+                    background: {
+                        fill: '#cfd0d4',
+                        stroke: '#cfd0d4'
+                    }
                 },
-                pointer: { type: 'line', visible: false, style: { fill: '#407ec3' }, size: '18%', offset: '78%', thickness: 0 }
+                pointer: {
+                    type: 'line',
+                    visible: false,
+                    style: {
+                        fill: '#407ec3'
+                    },
+                    size: '18%',
+                    offset: '78%',
+                    thickness: 0
+                }
             });
             var input = $('<div class="inputField">');
             var input2 = $('<div class="inputField2">');
@@ -129,14 +146,31 @@
                 snapToStep: true,
                 pointerGrabAction: 'progressBar',
                 rotation: 'clockwise',
-                style: { fill: 'transparent' },
+                style: {
+                    fill: 'transparent'
+                },
                 progressBar: {
-                    style: { fill: '#ef6100', stroke: '#ef6100' },
+                    style: {
+                        fill: '#ef6100',
+                        stroke: '#ef6100'
+                    },
                     size: '18%',
                     offset: '78%',
-                    background: { fill: '#cfd0d4', stroke: '#cfd0d4' }
+                    background: {
+                        fill: '#cfd0d4',
+                        stroke: '#cfd0d4'
+                    }
                 },
-                pointer: { type: 'line', visible: false, style: { fill: '#33AADD' }, size: '18%', offset: '78%', thickness: 0 }
+                pointer: {
+                    type: 'line',
+                    visible: false,
+                    style: {
+                        fill: '#33AADD'
+                    },
+                    size: '18%',
+                    offset: '78%',
+                    thickness: 0
+                }
             });
             $(knob2).append(knob3);
             $('#knob3').jqxKnob({
@@ -150,37 +184,65 @@
                 snapToStep: true,
                 pointerGrabAction: 'progressBar',
                 rotation: 'clockwise',
-                style: { fill: 'transparent' },
+                style: {
+                    fill: 'transparent'
+                },
                 progressBar: {
-                    style: { fill: '#18a25e', stroke: '#18a25e' },
+                    style: {
+                        fill: '#18a25e',
+                        stroke: '#18a25e'
+                    },
                     size: '18%',
                     offset: '78%',
-                    background: { fill: '#cfd0d4', stroke: '#cfd0d4' }
+                    background: {
+                        fill: '#cfd0d4',
+                        stroke: '#cfd0d4'
+                    }
                 },
-                pointer: { type: 'line', visible: false, style: { fill: '#00a4e1' }, size: '18%', offset: '78%', thickness: 0 }
+                pointer: {
+                    type: 'line',
+                    visible: false,
+                    style: {
+                        fill: '#00a4e1'
+                    },
+                    size: '18%',
+                    offset: '78%',
+                    thickness: 0
+                }
             });
             // Add label element to the Knob widget and attach event handlers to update them when the widget value updates.
             // Note that labels need not be sub elements of the knobs, and they are there just to display that they can be.
             $('#knobContainer').append(input);
             $('#knob2').append(input2);
             $('#knob3').append(input3);
-            $('#knobContainer').on('change', function (event) {
-                var html = '<span style="font-size: 14px; width: 33%; display:inline-block; color: #407ec3">All</span><span style="width:33%; display:inline-block;">' + event.args.value + '</span><span style="width:33%; font-size: 14px; color: #407ec3; display:inline-block;">Calls</span>';
+            $('#knobContainer').on('change', (event) => {
+                var html =
+                    '<span style="font-size: 14px; width: 33%; display:inline-block; color: #407ec3">All</span><span style="width:33%; display:inline-block;">' +
+                    event.args.value +
+                    '</span><span style="width:33%; font-size: 14px; color: #407ec3; display:inline-block;">Calls</span>';
                 $(input).html(html);
             });
-            $('#knob2').on('change', function (event) {
-                var html = '<div style="font-size: 14px; color: #ef6100">Resolved Issues</div><div>' + event.args.value + '</div>';
+            $('#knob2').on('change', (event) => {
+                var html = '<div style="font-size: 14px; color: #ef6100">Resolved Issues</div><div>' +
+                    event.args.value + '</div>';
                 $(input2).html(html);
                 event.stopPropagation();
             });
-            $('#knob3').on('change', function (event) {
-                var html = '<div>' + event.args.value + '</div><div style="font-size: 14px; color: #18a25e">Pending Issues</div>';
+            $('#knob3').on('change', (event) => {
+                var html = '<div>' + event.args.value +
+                    '</div><div style="font-size: 14px; color: #18a25e">Pending Issues</div>';
                 $(input3).html(html);
                 event.stopPropagation();
             });
-            $(input).html('<span style="font-size: 14px; width: 33%; display:inline-block; color: #407ec3">All</span><span style="width:33%; display:inline-block;">' + startValue1 + '</span><span style="width:33%; font-size: 14px; color: #00a4e1; display:inline-block;">Calls</span>');
-            $(input2).html('<div style="font-size: 14px; color: #ef6100">Resolved Issues</div><div>' + startValue2 + '</div>');
-            $(input3).html('<div>' + startValue3 + '</div><div style="font-size: 14px; color: #18a25e">Pending Issues</div>');
+            $(input).html(
+                '<span style="font-size: 14px; width: 33%; display:inline-block; color: #407ec3">All</span><span style="width:33%; display:inline-block;">' +
+                startValue1 +
+                '</span><span style="width:33%; font-size: 14px; color: #00a4e1; display:inline-block;">Calls</span>'
+            );
+            $(input2).html('<div style="font-size: 14px; color: #ef6100">Resolved Issues</div><div>' +
+                startValue2 + '</div>');
+            $(input3).html('<div>' + startValue3 +
+                '</div><div style="font-size: 14px; color: #18a25e">Pending Issues</div>');
         });
     </script>
 

@@ -40,7 +40,7 @@
     <button id="submitAnswer">Submit answer</button>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(() => {
             var notificationWidth = 300;
             $("#timerNotification").jqxNotification({ width: notificationWidth, position: "top-right", autoOpen: true, closeOnClick: false, autoClose: false, showCloseButton: false, template: "time" });
             $("#timeOutNotification").jqxNotification({ width: notificationWidth, position: "top-right", autoOpen: false, closeOnClick: true, autoClose: false, template: "time" });
@@ -49,12 +49,12 @@
             $("#errorTimeOutNotification").jqxNotification({ width: notificationWidth, position: "top-right", autoOpen: false, closeOnClick: true, autoClose: true, template: "error" });
             $("#answerInput").jqxInput({ width: 50, height: 25 });
             $("#submitAnswer").jqxButton();
-            $("#timerNotification").on("close", function () {
+            $("#timerNotification").on("close", () => {
                 if ($("#answerInput").val() != 8) {
                     $("#timeOutNotification").jqxNotification("open");
                 }
             });
-            $("#submitAnswer").click(function () {
+            $("#submitAnswer").click(() => {
                 if (seconds > 1) {
                     if ($("#answerInput").val() == 8) {
                         $("#correctNotification").jqxNotification("open");
@@ -68,7 +68,7 @@
                 }
             });
             var seconds = 15;
-            var interval = setInterval(function () {
+            var interval = setInterval(() => {
                 if (seconds > 1) {
                     seconds--;
                     $(".timer").text(seconds);
